@@ -2,100 +2,167 @@
 <html>
 <head>
     <title>Issue Certificate</title>
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
         }
+
         .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 40px;
+            width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: fadeIn 0.8s ease-in-out;
         }
+
         h2 {
-            color: #333;
             text-align: center;
+            margin-bottom: 25px;
+            color: #333;
         }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
+
         label {
+            font-size: 14px;
+            font-weight: 600;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             color: #555;
-            font-weight: bold;
         }
+
         input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+            border-radius: 6px;
+            border: 1px solid #ccc;
             font-size: 14px;
+            transition: all 0.3s ease;
         }
+
         input:focus {
+            border-color: #4e73df;
             outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 5px rgba(76,175,80,0.3);
+            box-shadow: 0 0 5px rgba(78,115,223,0.4);
         }
+
         button {
             width: 100%;
             padding: 12px;
-            background-color: #4CAF50;
+            background: #4e73df;
             color: white;
             border: none;
-            border-radius: 4px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.3s;
         }
+
         button:hover {
-            background-color: #45a049;
+            background: #2e59d9;
+            transform: translateY(-2px);
         }
-        .nav-links {
-            text-align: center;
-            margin-top: 20px;
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
         }
-        .nav-links a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #4CAF50;
-        }
-        .nav-links a:hover {
-            text-decoration: underline;
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h2>📋 Issue Certificate</h2>
-        
-        <form method="POST" action="/issue">
-            <div class="form-group">
-                <label for="name">Student Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter student name" required>
-            </div>
 
-            <div class="form-group">
-                <label for="course">Course:</label>
-                <input type="text" id="course" name="course" placeholder="Enter course name" required>
-            </div>
+<div class="container">
+    <h2>Issue Certificate</h2>
 
-            <div class="form-group">
-                <label for="issue_date">Issue Date:</label>
-                <input type="date" id="issue_date" name="issue_date" required>
-            </div>
+    <form id="certificateForm" method="POST" action="/issue">
 
-            <button type="submit">Issue Certificate</button>
-        </form>
-
-        <div class="nav-links">
-            <a href="/verify">Verify Certificate</a>
+        <div class="form-group">
+            <label>Student Name</label>
+            <input type="text" name="name" id="name" required>
         </div>
-    </div>
+
+        <div class="form-group">
+            <label>Father's Name</label>
+            <input type="text" name="father_name" id="father_name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input type="date" name="dob" id="dob" required>
+        </div>
+
+        <div class="form-group">
+            <label>Course</label>
+            <input type="text" name="course" id="course" required>
+        </div>
+
+        <div class="form-group">
+            <label>Issue Date</label>
+            <input type="date" name="issue_date" id="issue_date" required>
+        </div>
+
+        <button type="submit">Issue Certificate</button>
+
+    </form>
+</div>
+
+<script>
+    document.getElementById("certificateForm").addEventListener("submit", function(e) {
+
+        const name = document.getElementById("name").value.trim();
+        const fatherName = document.getElementById("father_name").value.trim();
+        const dob = document.getElementById("dob").value;
+        const issueDate = document.getElementById("issue_date").value;
+
+        if (name.length < 3) {
+            alert("Student name must be at least 3 characters.");
+            e.preventDefault();
+            return;
+        }
+
+        if (fatherName.length < 3) {
+            alert("Father's name must be at least 3 characters.");
+            e.preventDefault();
+            return;
+        }
+
+        if (dob >= issueDate) {
+            alert("Issue date must be after Date of Birth.");
+            e.preventDefault();
+            return;
+        }
+    });
+</script>
+
 </body>
 </html>

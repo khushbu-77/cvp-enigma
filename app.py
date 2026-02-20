@@ -18,19 +18,23 @@ def home():
 @app.route("/issue", methods=["POST"])
 def issue_certificate():
     name = request.form["name"]
+    father_name = request.form["father_name"]
+    dob = request.form["dob"]
     course = request.form["course"]
     issue_date = request.form["issue_date"]
 
     certificate_id = f"CERT-{uuid.uuid4().hex[:8].upper()}"
 
     normalized = normalize_data(
-        certificate_id, name, course, issue_date, "My Institute"
+        certificate_id, name, father_name, dob, course, issue_date, "My Institute"
     )
     cert_hash = generate_hash(normalized)
 
     insert_certificate(
         certificate_id,
         name,
+        father_name,
+        dob,
         course,
         "My Institute",
         issue_date,
@@ -61,6 +65,8 @@ def verify_result():
     normalized = normalize_data(
         record["certificate_id"],
         record["name"],
+        record["father_name"],
+        record["dob"],
         record["course"],
         record["issue_date"],
         record["issuer"]
