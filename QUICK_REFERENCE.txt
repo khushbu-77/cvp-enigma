@@ -1,0 +1,155 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                     CERTIFICATE VALIDATION PLATFORM                           ║
+║                           QUICK REFERENCE CARD                                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUICK START (3 STEPS)
+
+  1. Run tests:
+     $ python test_app.py
+
+  2. Start app:
+     $ python app.py
+
+  3. Open browser:
+     http://localhost:5000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ENDPOINTS
+
+  GET  /              → Issue Certificate form
+  POST /issue         → Process certificate issuance
+  GET  /verify        → Verify Certificate form
+  POST /verify/result → Check certificate validity
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FORM FIELDS
+
+  Issue Certificate:
+  ├─ Student Name (required)
+  ├─ Father's Name (required) ← NEW
+  ├─ Date of Birth (required) ← NEW
+  ├─ Course (required)
+  └─ Issue Date (required)
+
+  Verify Certificate:
+  └─ Certificate ID (required)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATABASE SCHEMA
+
+  certificates
+  ├─ certificate_id (Primary Key)
+  ├─ name
+  ├─ father_name ← NEW
+  ├─ dob ← NEW
+  ├─ course
+  ├─ issuer
+  ├─ issue_date
+  └─ hash (SHA-256)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FILES & PURPOSES
+
+  app.py                 Flask application with all routes
+  utils/db_utlis.py      Database operations
+  utils/hash_utils.py    Hash generation & data normalization
+  templates/issue.html   Certificate issuance form
+  templates/verify.html  Certificate verification form
+  templates/result.html  Result display page
+  test_app.py           Comprehensive test suite
+  database.db           SQLite database (auto-created)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DESIGN THEME
+
+  Colors:
+  ├─ Primary: #4e73df (Blue)
+  ├─ Accent: #1cc88a (Green)
+  └─ Gradient: 135deg blue → green
+
+  Typography:
+  └─ Font: Segoe UI, sans-serif
+
+  Effects:
+  ├─ Rounded corners (6px)
+  ├─ Smooth transitions (0.3s)
+  ├─ Fade-in animations
+  └─ Focus shadows
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CERTIFICATE FLOW
+
+  ISSUE PHASE:
+  1. User fills form with student details
+  2. System generates unique ID (CERT-XXXXXXXX)
+  3. Data normalized and hashed (SHA-256)
+  4. Certificate saved to database
+  5. User shown certificate ID
+
+  VERIFY PHASE:
+  1. User enters certificate ID
+  2. Database lookup for certificate
+  3. Data re-normalized and re-hashed
+  4. Hash compared with stored hash
+  5. Status displayed: VALID / INVALID / TAMPERED
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REQUIREMENTS
+
+  Python: 3.8+
+  Flask: 3.1.2
+  SQLite3: (included with Python)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TROUBLESHOOTING
+
+  Q: Port 5000 in use?
+  A: python app.py --port 5001
+
+  Q: Database corrupt?
+  A: Delete database.db and restart
+
+  Q: Import errors?
+  A: Ensure you're in cvp-enigma directory
+
+  Q: Tests failing?
+  A: Run: python test_app.py (for debugging output)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RECENT CHANGES (Latest Commit)
+
+  ✓ Added father_name field to certificates
+  ✓ Added dob (Date of Birth) field
+  ✓ Updated database schema
+  ✓ Modernized all HTML templates
+  ✓ Added comprehensive test suite
+  ✓ Added documentation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCUMENTATION
+
+  README.md              - Main project documentation
+  STARTUP_GUIDE.md      - Detailed startup instructions
+  COMPLETION_SUMMARY.txt - What was implemented
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STATUS: ✅ PRODUCTION READY
+
+The application is fully functional, tested, documented, and deployed.
+All components are synchronized and working correctly.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
