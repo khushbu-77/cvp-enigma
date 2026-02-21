@@ -1,168 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Issue Certificate</title>
+<meta charset="UTF-8">
+<title>Issue Certificate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #4e73df, #1cc88a);
-        }
+body {
+    background: #f5f8ff;
+    padding: 40px 0;
+}
 
-        .container {
-            background: #ffffff;
-            padding: 40px;
-            width: 400px;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            animation: fadeIn 0.8s ease-in-out;
-        }
+.container {
+    background: white;
+    max-width: 900px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
-        }
+h2 {
+    margin-bottom: 25px;
+    color: #1f2937;
+}
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+.section-title {
+    margin: 30px 0 15px;
+    font-weight: 600;
+    color: #2563eb;
+}
 
-        label {
-            font-size: 14px;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 6px;
-            color: #555;
-        }
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
+label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
 
-        input:focus {
-            border-color: #4e73df;
-            outline: none;
-            box-shadow: 0 0 5px rgba(78,115,223,0.4);
-        }
+label span {
+    color: red;
+}
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #4e73df;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+input, textarea, select {
+    width: 100%;
+    padding: 11px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
 
-        button:hover {
-            background: #2e59d9;
-            transform: translateY(-2px);
-        }
+textarea {
+    resize: none;
+    height: 90px;
+}
 
-        .error {
-            color: red;
-            font-size: 13px;
-            margin-top: 5px;
-            display: none;
-        }
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1e40af;
+}
+</style>
 </head>
 
 <body>
+    
+{% include "breadcrumb.html" %}
 
 <div class="container">
-    <h2>Issue Certificate</h2>
+<h2>Issue Certificate</h2>
 
-    <form id="certificateForm" method="POST" action="/issue">
+<form method="POST" action="/issue">
 
-        <div class="form-group">
-            <label>Student Name</label>
-            <input type="text" name="name" id="name" required>
+    <div class="section-title">Recipient Information</div>
+    <div class="grid">
+        <div>
+            <label>Student Name <span>*</span></label>
+            <input type="text" name="name" required>
         </div>
 
-        <div class="form-group">
-            <label>Father's Name</label>
-            <input type="text" name="father_name" id="father_name" required>
+        <div>
+            <label>Father's Name <span>*</span></label>
+            <input type="text" name="father_name" required>
         </div>
 
-        <div class="form-group">
-            <label>Date of Birth</label>
-            <input type="date" name="dob" id="dob" required>
+        <div>
+            <label>Date of Birth <span>*</span></label>
+            <input type="date" name="dob" required>
         </div>
 
-        <div class="form-group">
-            <label>Course</label>
-            <input type="text" name="course" id="course" required>
+        <div>
+            <label>Course / Program <span>*</span></label>
+            <input type="text" name="course" required>
+        </div>
+    </div>
+
+    <div class="section-title">Certificate Details</div>
+    <div class="grid">
+        <div>
+            <label>Issue Date <span>*</span></label>
+            <input type="date" name="issue_date" required>
         </div>
 
-        <div class="form-group">
-            <label>Issue Date</label>
-            <input type="date" name="issue_date" id="issue_date" required>
+        <div>
+            <label>Expiry Date</label>
+            <input type="date" name="expiry_date">
         </div>
 
-        <button type="submit">Issue Certificate</button>
+        <div style="grid-column: span 2;">
+            <label>Description</label>
+            <textarea name="description"></textarea>
+        </div>
+    </div>
 
-    </form>
+    <div class="section-title">Issuer Information</div>
+    <div class="grid">
+        <div>
+            <label>Issuer Organization <span>*</span></label>
+            <input type="text" name="issuer" required>
+        </div>
+
+        <div>
+            <label>Grade / Score</label>
+            <input type="text" name="grade">
+        </div>
+    </div>
+
+    <button type="submit">Issue Certificate</button>
+</form>
 </div>
-
-<script>
-    document.getElementById("certificateForm").addEventListener("submit", function(e) {
-
-        const name = document.getElementById("name").value.trim();
-        const fatherName = document.getElementById("father_name").value.trim();
-        const dob = document.getElementById("dob").value;
-        const issueDate = document.getElementById("issue_date").value;
-
-        if (name.length < 3) {
-            alert("Student name must be at least 3 characters.");
-            e.preventDefault();
-            return;
-        }
-
-        if (fatherName.length < 3) {
-            alert("Father's name must be at least 3 characters.");
-            e.preventDefault();
-            return;
-        }
-
-        if (dob >= issueDate) {
-            alert("Issue date must be after Date of Birth.");
-            e.preventDefault();
-            return;
-        }
-    });
-</script>
 
 </body>
 </html>

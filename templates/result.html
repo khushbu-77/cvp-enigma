@@ -1,182 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Result</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+<title>Verification Result</title>
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #4e73df, #1cc88a);
-            padding: 20px;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        .container {
-            background: #ffffff;
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            animation: fadeIn 0.8s ease-in-out;
-        }
+body {
+    background: #f5f8ff;
+    min-height: 100vh;
+}
 
-        h3 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 20px;
-        }
+.box {
+    max-width: 520px;
+    margin: 80px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    text-align: center;
+}
 
-        .success {
-            color: #1cc88a;
-            border-left: 5px solid #1cc88a;
-            padding: 20px;
-            background-color: #f0f9f6;
-            border-radius: 6px;
-        }
+.success {
+    color: #16a34a;
+}
 
-        .valid {
-            color: #1cc88a;
-            border-left: 5px solid #1cc88a;
-            padding: 20px;
-            background-color: #f0f9f6;
-            border-radius: 6px;
-        }
+.error {
+    color: #dc2626;
+}
 
-        .error {
-            color: #e74c3c;
-            border-left: 5px solid #e74c3c;
-            padding: 20px;
-            background-color: #fadbd8;
-            border-radius: 6px;
-        }
+.warn {
+    color: #d97706;
+}
 
-        .tampered {
-            color: #e74c3c;
-            border-left: 5px solid #e74c3c;
-            padding: 20px;
-            background-color: #fadbd8;
-            border-radius: 6px;
-        }
+.info {
+    margin-top: 25px;
+    text-align: left;
+    font-size: 14px;
+}
 
-        .details {
-            margin-top: 15px;
-        }
-
-        .details p {
-            margin: 12px 0;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .details strong {
-            color: #333;
-        }
-
-        .nav-links {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 1px solid #eee;
-        }
-
-        .nav-links a {
-            margin: 0 10px;
-            padding: 10px 20px;
-            text-decoration: none;
-            background-color: #4e73df;
-            color: white;
-            border-radius: 6px;
-            display: inline-block;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            background-color: #2e59d9;
-            transform: translateY(-2px);
-        }
-
-        .cert-id {
-            background-color: #f8f9fa;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            word-break: break-all;
-            border: 1px solid #dee2e6;
-            margin-top: 8px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+.info p {
+    margin-bottom: 6px;
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
 
-        {% if status == "issued" %}
-            <div class="success">
-                <h3>✅ Certificate Issued Successfully</h3>
-                <div class="details">
-                    <p><strong>Certificate ID:</strong></p>
-                    <div class="cert-id">{{ certificate_id }}</div>
-                    <p style="margin-top: 15px; font-size: 14px; color: #666;">
-                        Save this ID to verify the certificate later.
-                    </p>
-                </div>
-            </div>
+{% include "breadcrumb.html" %}
 
-        {% elif status == "valid" %}
-            <div class="valid">
-                <h3>✅ Certificate is VALID</h3>
-                <div class="details">
-                    <p><strong>Student Name:</strong> {{ record.name }}</p>
-                    <p><strong>Father's Name:</strong> {{ record.father_name }}</p>
-                    <p><strong>Date of Birth:</strong> {{ record.dob }}</p>
-                    <p><strong>Course:</strong> {{ record.course }}</p>
-                    <p><strong>Issuer:</strong> {{ record.issuer }}</p>
-                    <p><strong>Issue Date:</strong> {{ record.issue_date }}</p>
-                    <p style="margin-top: 15px; font-size: 14px; color: #666;">
-                        This certificate has not been tampered with and is authentic.
-                    </p>
-                </div>
-            </div>
+<div class="box">
 
-        {% elif status == "tampered" %}
-            <div class="tampered">
-                <h3>❌ Certificate TAMPERED</h3>
-                <p>⚠️ This certificate has been modified and is <strong>NOT AUTHENTIC</strong>.</p>
-                <p>Please contact the issuer to report this issue.</p>
-            </div>
+{% if status == "valid" %}
+    <h2 class="success">✅ Certificate is VALID</h2>
 
-        {% else %}
-            <div class="error">
-                <h3>❌ Certificate INVALID</h3>
-                <p>The certificate ID you entered <strong>does not exist</strong> in our database.</p>
-                <p>Please check the ID and try again.</p>
-            </div>
-        {% endif %}
-
-        <div class="nav-links">
-            <a href="/">Issue Certificate</a>
-            <a href="/verify">Verify Certificate</a>
-        </div>
+    <div class="info">
+        <p><strong>Name:</strong> {{ record.name }}</p>
+        <p><strong>Course:</strong> {{ record.course }}</p>
+        <p><strong>Issuer:</strong> {{ record.issuer }}</p>
+        <p><strong>Issue Date:</strong> {{ record.issue_date }}</p>
     </div>
+
+{% elif status == "invalid" %}
+    <h2 class="error">❌ Certificate NOT FOUND</h2>
+    <p>This certificate ID does not exist.</p>
+
+{% elif status == "tampered" %}
+    <h2 class="warn">⚠ Certificate TAMPERED</h2>
+    <p>Certificate data has been modified.</p>
+{% endif %}
+
+</div>
+
 </body>
 </html>

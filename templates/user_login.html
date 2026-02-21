@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Login</title>
+
+<style>
+body {
+    background: linear-gradient(135deg, #2563eb, #1cc88a);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    width: 360px;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 20px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+}
+</style>
+</head>
+
+<body>
+
+{% include "breadcrumb.html" %}
+
+<div class="card">
+    <h2>User Login</h2>
+
+    <form method="POST" action="/user-dashboard">
+        <label>Name *</label>
+        <input type="text" name="name" required>
+
+        <label>Date of Birth *</label>
+        <input type="date" name="dob" required>
+
+        <button type="submit">View Dashboard</button>
+    </form>
+</div>
+
+</body>
+</html>

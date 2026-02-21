@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Select Role</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    background: #f5f8ff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin: 80px auto;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 40px;
+}
+
+.roles {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    width: 260px;
+    border-radius: 14px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #6b7280;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+{% include "breadcrumb.html" %}
+
+<div class="container">
+    <h1>Select Your Role</h1>
+
+    <div class="roles">
+        <div class="card" onclick="location.href='/verify'">
+            <h3>Verify Certificate</h3>
+            <p>Check certificate authenticity</p>
+        </div>
+
+        <div class="card" onclick="location.href='/issue'">
+            <h3>Issue Certificate</h3>
+            <p>Create and issue certificates</p>
+        </div>
+
+        <div class="card" onclick="location.href='/user-login'">
+            <h3>User Login</h3>
+            <p>View your issued certificates</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

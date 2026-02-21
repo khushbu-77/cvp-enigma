@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate Validation Platform</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 8%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.nav-links a {
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+    color: #374151;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+/* ===== HERO ===== */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: auto;
+    opacity: 0.9;
+    font-size: 18px;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 26px;
+    margin: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.primary {
+    background: white;
+    color: #1e3a8a;
+}
+
+.primary:hover {
+    background: #f3f4f6;
+}
+
+.secondary {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.secondary:hover {
+    background: white;
+    color: #1e3a8a;
+}
+
+/* ===== FEATURES ===== */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 80px 8%;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.feature-card h3 {
+    margin-bottom: 15px;
+    color: #1e3a8a;
+}
+
+/* ===== HOW IT WORKS ===== */
+.how-it-works {
+    background: #eef2ff;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.how-it-works h2 {
+    margin-bottom: 40px;
+    font-size: 28px;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.step {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 260px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.step span {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.step:hover {
+    transform: translateY(-6px);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #1f2937;
+    color: white;
+    font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .features, .steps {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+</head>
+
+<body>
+{% include "breadcrumb.html" %}
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">CVP Enigma</div>
+    <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Secure Certificate Validation</h1>
+    <p>
+        Verify authenticity of certificates using cryptographic hashing
+        and issuer-backed records. No fake PDFs. No screenshots fraud.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="{{ url_for('select_role') }}" class="btn primary">
+            Explore Features
+        </a>
+        <a href="#how" class="btn secondary">How It Works</a>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features">
+    <div class="feature-card">
+        <h3>🔐 Tamper Proof</h3>
+        <p>
+            Certificates are verified against immutable server-side records
+            using SHA-256 hashing.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🏛 Verified Issuers</h3>
+        <p>
+            Only authenticated and verified issuers can issue certificates,
+            ensuring accountability and trust.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📱 Screenshot Safe</h3>
+        <p>
+            Works even if certificates are shared via WhatsApp or screenshots.
+            Verification is data-based, not file-based.
+        </p>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-it-works">
+    <h2>How It Works</h2>
+
+    <div class="steps">
+        <div class="step">
+            <span>1</span>
+            <p>Issuer logs in and issues a certificate</p>
+        </div>
+        <div class="step">
+            <span>2</span>
+            <p>Certificate data is hashed and stored securely</p>
+        </div>
+        <div class="step">
+            <span>3</span>
+            <p>Verifier checks authenticity using Certificate ID or QR</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 CVP Enigma • Hackathon Project</p>
+</footer>
+
+<script>
+const elements = document.querySelectorAll('.feature-card, .step');
+
+function revealOnScroll() {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    elements.forEach(el => {
+        const boxTop = el.getBoundingClientRect().top;
+        if (boxTop < triggerBottom) {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+</script>
+
+</body>
+</html>

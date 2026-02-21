@@ -1,0 +1,33 @@
+<style>
+.breadcrumb {
+    background: #f1f5f9;
+    padding: 12px 8%;
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+.breadcrumb span {
+    color: #6b7280;
+}
+
+.breadcrumb-sep {
+    margin: 0 6px;
+    color: #9ca3af;
+}
+</style>
+
+<div class="breadcrumb">
+    {% for item in breadcrumbs %}
+        {% if not loop.last %}
+            <a href="{{ item.url }}">{{ item.label }}</a>
+            <span class="breadcrumb-sep">→</span>
+        {% else %}
+            <span>{{ item.label }}</span>
+        {% endif %}
+    {% endfor %}
+</div>

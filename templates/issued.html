@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Certificate Issued</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #f5f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 60px 50px;
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* GREEN TICK */
+.tick {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    background: #dcfce7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: #16a34a;
+}
+
+/* TEXT */
+h1 {
+    color: #16a34a;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #374151;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+/* CERT ID */
+.cert-id {
+    background: #f1f5f9;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #1f2937;
+    margin-bottom: 30px;
+}
+
+/* BUTTON */
+a {
+    display: inline-block;
+    padding: 12px 28px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+a:hover {
+    background: #1e40af;
+}
+</style>
+</head>
+
+<body>
+
+{% include "breadcrumb.html" %}
+
+<div class="card">
+    <div class="tick">✔</div>
+
+    <h1>Successfully Issued</h1>
+    <p>Your certificate has been securely generated and stored.</p>
+
+    <div class="cert-id">
+        <strong>Certificate ID</strong><br>
+        {{ certificate_id }}
+    </div>
+
+    <a href="/verify">Verify Certificate</a>
+</div>
+
+</body>
+</html>

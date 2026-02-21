@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Dashboard</title>
+
+<style>
+body {
+    background: #f5f8ff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 60px auto;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.sub {
+    color: #6b7280;
+    margin-bottom: 30px;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    width: 240px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.stat h3 {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.stat p {
+    font-size: 28px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+{% include "breadcrumb.html" %}
+
+<div class="container">
+    <h1>Certificate Dashboard</h1>
+    <p class="sub">Monitor and manage all issued certificates</p>
+
+    <div class="stats">
+        <div class="stat">
+            <h3>Total Certificates</h3>
+            <p>{{ total }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>Valid Certificates</h3>
+            <p>{{ valid }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>Total Verifications</h3>
+            <p>{{ verifications }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>Issues</h3>
+            <p>{{ issues }}</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
